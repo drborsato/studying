@@ -30,6 +30,27 @@ public class ArrayList<T> implements List<T> {
     size++;
   }
 
+  public void add(int index, Object o) {
+    ensureCapacity();
+    checkIndex(index-1);//It is possible to add in last position, which will be data[index]
+    data[index] = o;
+    size++;
+  }
+
+  public T get(int index) {
+    checkIndex(index);
+    return (T) data[index];
+  }
+
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
+  public void remove(int index) {
+    checkIndex(index);
+    data[index] = null;
+  }
+
   private void ensureCapacity() {
     if (data.length == size) {
       Object[] newData = new Object[size*2];
@@ -40,19 +61,8 @@ public class ArrayList<T> implements List<T> {
     }
   }
 
-  public void add(int index, Object o) {
-    data[index] = o;
-  }
-
-  public T get(int index) {
-    return (T) data[index];
-  }
-
-  public boolean isEmpty() {
-    return size == 0;
-  }
-
-  public void remove(int index) {
-    data[index] = null;
+  private void checkIndex(int index) {
+    if (index < 0 || index >= size)
+      throw new ArrayIndexOutOfBoundsException("Check your index dude!");
   }
 }
