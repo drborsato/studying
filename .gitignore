@@ -37,3 +37,4 @@ target/
 out/**
 *.class
 build/
+/.metadata/
